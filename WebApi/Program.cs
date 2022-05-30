@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
 using System.Reflection;
 using WebApi.Middlewares;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<BookStoreDbContext>(Options => Options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddSingleton<ILoggerService,ConsoleLogger>(); //Yazdığımız servisi buraya ekledik.Iloggerservice çağrıdlığında consolelogger çalışsın. console da çalışsın istersen consoloeloggerı dbde yazsın istiyorsan dbloggeri sağdaki kısma yazmalısın.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

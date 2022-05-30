@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Net;
 using Newtonsoft.Json;
+using WebApi.Services;
 
 namespace WebApi.Middlewares
 {
@@ -10,9 +11,11 @@ namespace WebApi.Middlewares
     {
 
         private readonly RequestDelegate _next;
-        public CustomExceptionMiddleware(RequestDelegate next)
+        private readonly ILoggerService _loggerService; //dependency injection
+        public CustomExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
+            _loggerService = loggerService;
         }
 
         /* Invoke metodu middleware call edildiğinde execute edilecek olan metottur.Bu metot; end-poit'e gelen request'i ve end-point'in return ettiği response'a müdahale edebilmemizi sağlar.  */
@@ -25,13 +28,13 @@ namespace WebApi.Middlewares
             try
             {
             string message = "[Request] HTTP " + context.Request.Method + " - " + context.Request.Path;
-            Console.WriteLine(message);
+            _loggerService.Write(message);
 
             await _next(context);
             watch.Stop();
             
             message = "[Response] HTTP " + context.Request.Method + " - " + context.Request.Path + " responded " + context.Response.StatusCode + " in " + watch.Elapsed.TotalMilliseconds + " ms ";
-            Console.WriteLine(message);
+            _loggerService.Write(message);
 
             }
             catch (Exception ex)
@@ -48,7 +51,7 @@ namespace WebApi.Middlewares
         {
 
             string message = "[Error]  HTTP " + context.Request.Method + " - " + context.Response.StatusCode + "Error Message" + ex.Message + " in " + watch.Elapsed.TotalMilliseconds + "ms";
-            Console.WriteLine(message);
+            _loggerService.Write(message);
 
             context.Response.ContentType ="application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
