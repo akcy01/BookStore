@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using WebApi.Entities;
 
 namespace WebApi.DBOperations
 {
@@ -15,7 +16,29 @@ namespace WebApi.DBOperations
                 }
                 else
                 {
-                    context.Books.AddRange(new Book{
+                    context.Genres.AddRange(
+                        new Genre{
+
+                            Name = "Personal Growth"
+
+                        },
+
+                        new Genre{
+
+                            Name = "Science Fiction"
+
+                        },
+
+                        new Genre{
+
+                            Name = "Romance"
+
+                        }
+                    );
+
+
+                    context.Books.AddRange(
+                new Book{
                     // Id = 1,
                     Title = "Dark Blood",
                     GenreId = 1,
@@ -37,7 +60,9 @@ namespace WebApi.DBOperations
                     GenreId = 2,
                     PageCount = 110,
                     PublishDate = new DateTime(2004,01,10)
-                });
+                }
+                
+                );
 
                 context.SaveChanges(); //Eklediğimiz verileri kaydetmemiz gerekir!!
 

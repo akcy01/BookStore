@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace WebApi.BookOperations.CreateBook
+namespace WebApi.Application.BookOperations.CreateBook
 {
     public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand> // Burda yaptığımız şey bu validator classı createbookcommand ı valide etsin.Onun nesnelerini objelerini valide eder. demek.Validason constructor aracılığıyla çalışır o yüzden constructor oluşturman gerekir muhakkak.
     {
