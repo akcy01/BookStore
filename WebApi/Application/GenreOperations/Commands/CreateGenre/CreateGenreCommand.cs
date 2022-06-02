@@ -1,7 +1,7 @@
 using WebApi.DBOperations;
 using WebApi.Entities;
 
-namespace WebApi.Application.GenreOperations.CreateGenre
+namespace WebApi.Application.GenreOperations.Commands.CreateGenre
 {
     public class CreateGenreCommand
     {

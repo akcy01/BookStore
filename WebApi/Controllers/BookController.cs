@@ -9,7 +9,7 @@ using WebApi.Application.BookOperations.CreateBook;
 using WebApi.Application.BookOperations.UpdateBook;
 using WebApi.Application.BookOperations.DeleteBook;
 
-namespace WebApi.AddControllers
+namespace WebApi.Controllers
 {
         [ApiController]
         [Route("[controller]")]
@@ -24,33 +24,6 @@ namespace WebApi.AddControllers
             _context = context;
             _mapper = mapper;
         }
-
-        // private static List<Book> BookList = new List<Book>()
-        // {
-        //     new Book{
-        //         Id = 1,
-        //         Title = "Dark Blood",
-        //         GenreId = 1,
-        //         PageCount = 200,
-        //         PublishDate = new DateTime(2001,06,12)
-        //     },
-
-        //     new Book{
-        //         Id = 2,
-        //         Title = "White River Burn",
-        //         GenreId = 2,
-        //         PageCount = 432,
-        //         PublishDate = new DateTime(2009,03,11)
-        //     },
-
-        //     new Book{
-        //         Id = 3,
-        //         Title = "Amok Runner",
-        //         GenreId = 2,
-        //         PageCount = 110,
-        //         PublishDate = new DateTime(2004,01,10)
-        //     }
-        // };
 
         [HttpGet]
             
